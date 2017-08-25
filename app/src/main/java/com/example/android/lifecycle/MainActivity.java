@@ -49,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
      * and then update the UI in onStart when the Activity is back on the screen.
      */
     private static final ArrayList<String> mLifecycleCallbacks = new ArrayList<>();
+
     /**
      * Called when the activity is first created. This is where you should do all of your normal
      * static set up: create views, bind data to lists, etc.
-     *
+     * <p>
      * Always followed by onStart().
      *
      * @param savedInstanceState The Activity's previously frozen state, if there was one.
@@ -79,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // COMPLETED (4) Iterate backwards through mLifecycleCallbacks, appending each String and a newline to mLifecycleDisplay
+        // COMPLETED (4) Iterate backwards through mLifecycleCallbacks, appending each String and
+        // a newline to mLifecycleDisplay
         /*
          * Since any updates to the UI we make after onSaveInstanceState (onStop, onDestroy, etc),
          * we use an ArrayList to track if these lifecycle events had occurred. If any of them have
@@ -107,27 +109,25 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Called when the activity is becoming visible to the user.
-     *
+     * <p>
      * Followed by onResume() if the activity comes to the foreground, or onStop() if it becomes
      * hidden.
      */
     @Override
     protected void onStart() {
         super.onStart();
-
         logAndAppend(ON_START);
     }
 
     /**
      * Called when the activity will start interacting with the user. At this point your activity
      * is at the top of the activity stack, with user input going to it.
-     *
+     * <p>
      * Always followed by onPause().
      */
     @Override
     protected void onResume() {
         super.onResume();
-
         logAndAppend(ON_RESUME);
     }
 
@@ -136,14 +136,13 @@ public class MainActivity extends AppCompatActivity {
      * used to commit unsaved changes to persistent data, stop animations and other things that may
      * be consuming CPU, etc. Implementations of this method must be very quick because the next
      * activity will not be resumed until this method returns.
-     *
+     * <p>
      * Followed by either onResume() if the activity returns back to the front, or onStop() if it
      * becomes invisible to the user.
      */
     @Override
     protected void onPause() {
         super.onPause();
-
         logAndAppend(ON_PAUSE);
     }
 
@@ -152,14 +151,13 @@ public class MainActivity extends AppCompatActivity {
      * resumed and is covering this one. This may happen either because a new activity is being
      * started, an existing one is being brought in front of this one, or this one is being
      * destroyed.
-     *
+     * <p>
      * Followed by either onRestart() if this activity is coming back to interact with the user, or
      * onDestroy() if this activity is going away.
      */
     @Override
     protected void onStop() {
         super.onStop();
-
         // COMPLETED (2) Add the ON_STOP String to the front of mLifecycleCallbacks
         /*
          * Since any updates to the UI we make after onSaveInstanceState (onStop, onDestroy, etc),
@@ -167,22 +165,20 @@ public class MainActivity extends AppCompatActivity {
          * occurred, we append their respective name to the TextView.
          */
         mLifecycleCallbacks.add(0, ON_STOP);
-
         logAndAppend(ON_STOP);
     }
 
     /**
      * Called after your activity has been stopped, prior to it being started again.
-     *
+     * <p>
      * Always followed by onStart()
      */
     @Override
     protected void onRestart() {
         super.onRestart();
-
         logAndAppend(ON_RESTART);
     }
-    
+
     /**
      * The final call you receive before your activity is destroyed. This can happen either because
      * the activity is finishing (someone called finish() on it, or because the system is
@@ -192,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         // COMPLETED (3) Add the ON_DESTROY String to the front of mLifecycleCallbacks
         /*
          * Since any updates to the UI we make after onSaveInstanceState (onStop, onDestroy, etc),
@@ -221,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private void logAndAppend(String lifecycleEvent) {
         Log.d(TAG, "Lifecycle Event: " + lifecycleEvent);
-
         mLifecycleDisplay.append(lifecycleEvent + "\n");
     }
 
